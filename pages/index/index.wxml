@@ -21,8 +21,20 @@
   </view>
 
   <!-- 海报 -->
-  <view class="flex justify-center">
-    
+  <view id="posters-container" class="text-center">
+    <view class="poster margin-tb" wx:for="{{posters}}" wx:key="id">
+      <image src="{{item.image}}" lazy-load="true" mode="widthFix" style="width: 100%; border-radius: 30rpx;"></image>
+      <view class="text-right margin-tb">
+        <view class="flex align-end justify-end">
+          <text class="cu-avatar bg-white margin-left-xl" style="background-image: url('/assets/images/icon/share.png'); with: 54rpx; height: 54rpx;"></text>
+          <text class="poster-button-text">分享</text>
+          <text class="cu-avatar bg-white margin-left-xl" style="background-image: url('/assets/images/icon/unliked.png'); with: 54rpx; height: 54rpx;"></text>
+          <text class="poster-button-text">点赞</text>
+          <text class="cu-avatar bg-white margin-left-xl" style="background-image: url('/assets/images/icon/download.png'); with: 54rpx; height: 54rpx;"></text>
+          <text class="poster-button-text">保存</text>
+        </view>
+      </view>
+    </view>
   </view>
 </view>
 <view class="text-center margin-top flex align-start justify-center">

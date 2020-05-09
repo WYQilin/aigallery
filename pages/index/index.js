@@ -10,6 +10,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     defaultAvatar: '/assets/images/avatar/1.jpg',
+    posters: []
   },
   //事件处理函数
   bindViewTap: function() {
@@ -49,6 +50,8 @@ Page({
         }
       })
     }
+
+    this.getPosterList();
   },
   getUserInfo: function(e) {
     console.log(e)
@@ -56,6 +59,17 @@ Page({
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
+    })
+  },
+  getPosterList: function() {
+    app.apiRequest({
+      url: '/posters',
+      success: (res) => {
+        console.log(res)
+        this.setData({
+          posters: res.data.data
+        })
+      }
     })
   }
 })

@@ -47,6 +47,54 @@ App({
     })
   },
   globalData: {
-    userInfo: null
-  }
+    userInfo: null,
+    apiDomain: 'http://api.buling.club/api',
+  },
+  
+  //全局统一调用接口的方法
+  apiRequest: function (options) {
+    wx.request({
+      url: this.globalData.apiDomain + options.url,
+      method: options.method ? options.method : 'GET',
+      header: {
+        'Authorization': 'Bearer ' + wx.getStorageSync('token'),
+        'Accept': 'application/json',
+      },
+      dataType: 'json',
+      data: options.data,
+      success: res => {
+        switch (res.statusCode) {
+          case 200:
+            options.success(res);
+            break;
+          case 401:
+            this.toLogin();
+            break;
+          case 422:
+            break;
+          case 404:
+            wx.showToast({
+              title: '请求地址不存在',
+              icon: 'none'
+            })
+            break;
+          default:
+            wx.showToast({
+              title: '出错了～请稍后再试',
+              icon: 'none'
+            })
+        }
+      },
+      fail: res => {
+        if (options.fail) {
+          options.fail(res);
+        }
+      },
+      complete: res => {
+        if (options.complete) {
+          options.complete(res);
+        }
+      }
+    });
+  },
 })
