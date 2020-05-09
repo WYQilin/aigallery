@@ -1,0 +1,258 @@
+/* pages/waterfall/index.wxss */
+.cu-waterfall .image image {
+  background-size: 350rpx;
+  background-color: #8A8A8A;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQYAAABgCAMAAADIMSz9AAAAq1BMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Nr6iZAAAAOHRSTlMAv+/6/N/PHxGAoGAwQE+PIwxwViwGrye9gmTs9uTIbejbCfKolnxKtRQPiHicW0XTORmLaDRTPS/Sx3MAAAthSURBVHja7Nlpc5pAAMbxB3ZdwAjxQo2iInjfOZo+3/+TlaNNwWgbGztlrP8XJNmJM/obdhcQt27dKkZ2FG5pJHHrxnBjuDHcGC7GoPy3yjjdMpQNAAOuAJS5QXH7I4Y+KZPI+X/NMO4mdf5zhiGS7k8zuM76QXA8nU771KKjopoOKyhof4vhSZN8n/eMYvZRhmU3k/5zUqjM8NbFW3OKkTrMp+yikH2UoSozkcz/kqbX8KO2x6H73nLOPQrZhxlIvffLQmYY7qTu4n1b9mooYh9nEE38ssYbw5NhTNnHkRyGTcMwUbj+BoMSQpxioBBiisL1SQajvtodMrh7kj8YZquV48Y/W5OEIc5C4focg+2TcuPmGWBUq9OUwexIUnYWwJAjN50U1epVTIruvGPVkFTpUVdSvmQZ0l5ShgmlGkiOfzLoV7JE3jNq30ZUTdFvumMOTjE8ebSANcOna2OoCs7LHkuxw7MUM2DNkZtnWJpmPWH4IkU1+lPI3c9JYZhmgMJ1LsOMnolZyFEbO8F7ABt2DncKzxMJw6MUBlDz5OyNgZ7nXcFO8UhRBXYe+w8+VQ0Ielyf2CkOGa5op1iE7MYnhU7Sj0dsKZp5BtiOM/nOIDfPz/ciwxBuHaeNwnUuA1rpilhpjebJQJ2+e2qJfJRMkrNrWyLhSPEFcS6SLCr8gmGgaQN5hQzBiBNkaki5Md8xDFOGdKfwsgwFvHb6EwZM2c/ueG6L7DdyDC2l+imD3jMiOF/f4SVUCYPcK/WCwnU+w06KBTIFlk5xd/yewjTTo4vAXF7VPcXTnP7B/G4OqC8y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');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-position-x: 8px;
+}
+
+.container {
+  padding: 0rpx 30rpx;
+  background: #ffffff;
+}
+
+.contribution-card {
+  padding: 0;
+  background: #ffffff;
+}
+
+.card-header {
+  margin-bottom: 30rpx;
+}
+
+.title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #24292f;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.subtitle {
+  font-size: 24rpx;
+  color: #57606a;
+}
+
+.calendar-container {
+  margin: 20rpx 0 20rpx;
+}
+
+.month-spacer {
+  width: 30rpx;
+  margin-right: 10rpx;
+}
+
+.months {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12rpx;
+}
+
+.month-label {
+  width: 20rpx;
+  font-size: 20rpx;
+  color: #57606a;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+/* 主网格区域 */
+.calendar-grid {
+  display: flex;
+}
+
+.weekday-column {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+  margin-right: 10rpx;
+}
+
+.weekday-label {
+  height: 20rpx;
+  line-height: 20rpx;
+  font-size: 20rpx;
+  color: #57606a;
+  text-align: center;
+}
+
+.weekday-spacer {
+  height: 24rpx; /* 24rpx(年份) + 4rpx(间距) + 24rpx(月份) */
+  margin-bottom: 8rpx;
+}
+
+/* 贡献格子区域 */
+.contribution-scroll {
+  flex: 1;
+  overflow: hidden;
+}
+
+.contribution-grid {
+  display: flex;
+  gap: 4rpx;
+  padding: 0 12rpx;
+}
+
+.contribution-column {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.contribution-row {
+  display: flex;
+  gap: 4rpx;
+}
+
+.contribution-cell:active {
+  transform: scale(1.2);
+}
+
+/* 贡献度颜色 */
+.level-0 { background-color: #ebedf0; }
+.level-1 { background-color: #9be9a8; }
+.level-2 { background-color: #40c463; }
+.level-3 { background-color: #30a14e; }
+.level-4 { background-color: #216e39; }
+
+/* 修改底部信息栏样式 */
+.bottom-info {
+  padding: 10rpx;
+  border-top: 1rpx solid #eaecef;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 80rpx;
+}
+
+/* 左侧日期信息样式 */
+.selected-date {
+  flex: 1;
+  padding-right: 0rpx;
+  min-height: 60rpx; /* 即使没有选中日期也保持高度 */
+}
+
+.date-text {
+  font-size: 24rpx;
+  color: #24292f;
+  font-weight: 500;
+  line-height: 1.4;
+  display: block;
+}
+
+.count-text {
+  font-size: 22rpx;
+  color: #57606a;
+  line-height: 1.4;
+}
+
+/* 右侧图例样式 */
+.legend {
+  padding-left: 20rpx;
+  border-left: 1rpx solid #eaecef;
+}
+
+.legend-text {
+  font-size: 24rpx;
+  color: #57606a;
+  margin-right: 16rpx;
+  white-space: nowrap; /* 防止文字换行 */
+}
+
+.legend-items {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  flex-wrap: nowrap; /* 防止图例换行 */
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+}
+
+.legend-item .contribution-cell {
+  width: 16rpx;
+  height: 16rpx;
+}
+
+.legend-item text {
+  font-size: 20rpx;
+  color: #57606a;
+  white-space: nowrap;
+}
+
+/* 调整月份行上边距 */
+.month-row {
+  position: relative;
+  height: 24rpx;
+  margin-bottom: 8rpx;
+  display: flex;
+  gap: 4rpx;
+  padding: 0 12rpx;
+}
+
+/* 添加空格子样式 */
+.level-empty {
+  background-color: transparent;
+}
+
+.contribution-column {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.contribution-cell {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 3rpx;
+  font-size: 10px;
+  text-align: center;
+  color: red;
+}
+
+.month-begin {
+  border-bottom: 2px solid #57606a;
+}
+
+.month-end {
+  border-top: 2px solid #57606a;
+}
+
+.selected-box {
+  border: 2px solid white;
+}
+
+.empty {
+  display: inline-flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 256rpx;
+  height: 256rpx;
+  background-size: cover;
+  background-position: center;
+  vertical-align: middle;
+}
+
+/* 悬浮球样式 */
+.fixed-ball {
+  position: fixed;
+  right: 30rpx;
+  bottom: 100rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button[disabled] {
+  text-decoration: line-through;
+}
+

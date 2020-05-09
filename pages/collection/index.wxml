@@ -1,0 +1,70 @@
+<cu-custom bgColor="bg-gradual-pink">
+  <view slot="content">合集</view>
+</cu-custom>
+
+<view wx:if="{{posters.length == 0}}" class="margin-tb-xl padding-top-xl padding-bottom-xl" style="margin-top: 206px;">
+  <view class="flex justify-center text-xsl">
+    <image class="empty" src="/assets/images/empty.png"></image>
+  </view>
+  <view class="flex justify-center padding-top-sm">
+    <view class="text-gray text">暂无数据</view>
+  </view>
+</view>
+
+<view id="posters-container">
+  <view class="poster margin-top-xs padding-bottom-xl solids" wx:for="{{posters}}" wx:key="group_id" wx:for-item="collection">
+    <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" style="height: {{(750 / collection.width) * collection.height}}rpx;">
+      <swiper-item wx:for="{{collection.images}}" wx:key="item" bindtap="previewImage" data-url="{{item.url}}" data-groupid="{{collection.group_id}}">
+        <image src="{{item.thumb}}" mode="aspectFill"></image>
+      </swiper-item>
+    </swiper>
+    <view class="bg-white margin-lr-sm radius-lg-bottom">
+      <view class="flex flex-wrap padding-lr padding-top-sm text-left align-center">
+        <view class="basis-df">
+          <text class="text-bold">模型</text>
+          <text class="text-Abc text-gray self-end margin-left-xs text-sm">model</text>
+        </view>
+        <view class="basis-df">
+          <text class="text-bold">合集ID</text>
+          <text class="text-Abc text-gray self-end margin-left-xs text-sm">{{collection.group_id}}</text>
+        </view>
+        <scroll-view scroll-x="true" style="width: 100%; white-space: nowrap;">
+          <text>{{collection.options.model || '--'}}</text>
+        </scroll-view>
+      </view>
+      <view class="flex flex-wrap padding-lr padding-top-sm text-left align-end">
+        <view class="basis-df">
+          <text class="text-bold">迭代步数</text>
+          <text class="text-Abc text-gray self-end margin-left-xs text-sm">steps</text>
+        </view>
+        <view class="basis-df">
+          <text class="text-bold">提示词引导系数</text>
+          <text class="text-Abc text-gray self-end margin-left-xs text-sm">CFG</text>
+        </view>
+        <view class="basis-df padding-top-xs">{{collection.options.steps || '--'}}</view>
+        <view class="basis-df padding-top-xs">{{collection.options.cfg_scale}}</view>
+      </view>
+      <view class="flex flex-wrap padding-lr padding-top-sm text-left align-center">
+        <view class="basis-df">
+          <text class="text-bold">图片尺寸</text>
+          <text class="text-Abc text-gray self-end margin-left-xs text-sm">model</text>
+        </view>
+        <view class="basis-df">
+          <text class="text-bold">采样方法</text>
+          <text class="text-Abc text-gray self-end margin-left-xs text-sm">sampler</text>
+        </view>
+        <view class="basis-df padding-top-xs">{{collection.width || '--'}} x {{collection.height || '--'}}</view>
+        <view class="basis-df padding-top-xs">{{collection.options.sampler || '--'}}</view>
+      </view>
+      <view class="flex flex-wrap padding-lr padding-top-sm text-left align-end">
+        <view class="basis-df">
+          <text class="text-bold">提示词</text>
+          <text class="text-Abc text-gray self-end margin-left-xs text-sm">prompt 「{{collection.options.positive_prompt.length || 0}}字」</text>
+        </view>
+        <scroll-view scroll-x="true" style="width: 100%; white-space: nowrap;">
+          <text>{{collection.options.positive_prompt || '--'}}</text>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+</view>

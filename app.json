@@ -1,0 +1,33 @@
+{
+  "pages": [
+    "pages/waterfall/index",
+    "pages/collection/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "奇绘图册",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#6887e1",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/collection/index",
+        "text": "合集",
+        "iconPath": "assets/images/icon/collection.png",
+        "selectedIconPath": "assets/images/icon/collection.png"
+      },
+      {
+        "pagePath": "pages/waterfall/index",
+        "text": "图池",
+        "iconPath": "assets/images/icon/pictures.png",
+        "selectedIconPath": "assets/images/icon/pictures.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap.json"
+}

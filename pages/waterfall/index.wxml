@@ -1,0 +1,170 @@
+<!--pages/index/plugin/waterfall/waterfall.wxml-->
+<cu-custom bgColor="bg-gradual-pink">
+  <view slot="content">图池</view>
+</cu-custom>
+
+<!-- 贡献图，日期选择 -->
+<view class="container">
+  <view class="contribution-card">
+    <view class="calendar-container">
+      <!-- 主网格区域 -->
+      <view class="calendar-grid">
+        <!-- 周几标签列 -->
+        <view class="weekday-column">
+          <text class="weekday-spacer"></text>
+          <text wx:for="{{weekdays}}" wx:key="index" class="weekday-label">{{item}}</text>
+        </view>
+
+        <!-- 贡献格子区域 -->
+        <scroll-view 
+          scroll-x 
+          class="contribution-scroll"
+          enhanced="true"
+          show-scrollbar="false"
+          scroll-anchoring="true">
+          <!-- 月份行 -->
+          <view class="month-row">
+            <view class="contribution-column" wx:for="{{months}}" wx:key="month">
+              <view class="month-label" style="transform: translateX(-50%);">{{item}}</view>
+            </view>
+          </view>
+          
+          <view class="contribution-grid">
+            <view class="contribution-column" wx:for="{{contributionData}}" wx:key="week">
+              <view 
+                class="contribution-cell {{item && item.hide == 0 ? item.level : 'level-empty'}} {{item.day == '1' ? 'month-begin' : ''}} {{selectedDate && selectedDate.date == item.date ? 'selected-box' : ''}}" 
+                wx:for="{{item.days}}" 
+                wx:key="*this"
+                bindtap="showDetail"
+                data-detail="{{item}}"
+              />
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+
+    <!-- 底部信息栏 -->
+    <view class="bottom-info">
+      <view class="selected-date">
+        <block wx:if="{{selectedDate}}">
+          <text class="date-text">{{selectedDate.date_w}}</text>
+          <text class="count-text">{{selectedDate.count}} 张绘图</text>
+        </block>
+        <block wx:else>
+          <text class="date-text">过去一年</text>
+          <text class="count-text">{{totalContributions}} 张绘图</text>
+        </block>
+      </view>
+      <view class="legend">
+        <text class="legend-text">产出度：</text>
+        <view class="legend-items">
+          <view class="legend-item">
+            <view class="contribution-cell level-0"></view>
+            <text>0</text>
+          </view>
+          <view class="legend-item">
+            <view class="contribution-cell level-1"></view>
+            <text>1-10</text>
+          </view>
+          <view class="legend-item">
+            <view class="contribution-cell level-2"></view>
+            <text>10-20</text>
+          </view>
+          <view class="legend-item">
+            <view class="contribution-cell level-3"></view>
+            <text>20-50</text>
+          </view>
+          <view class="legend-item">
+            <view class="contribution-cell level-4"></view>
+            <text>50+</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 列表 -->
+<view wx:if="{{leftData.length > 0}}" class="cu-waterfall bg-white padding-bottom-xl flex">
+  <view class="flex-sub">
+    <view class="flow">
+      <view class="cu-card case no-card" wx:for="{{leftData}}" wx:key="item">
+        <view class="cu-item">
+          <view class="image" style="margin: 12rpx 6rpx 12rpx 12rpx">
+            <image src="{{item.thumb}}" data-height="{{item.height}}" data-width="{{item.width}}" mode="widthFix" lazy-load="true" bindtap="previewImage" bindlongpress="handleLongPress" data-url="{{item.url}}" style="height: {{(360 / item.width) * item.height}}rpx;"></image>
+            <text  class="text-gray text-sm">{{item.modify_time}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="flex-sub">
+    <view class="flow">
+      <view class="cu-card case no-card" wx:for="{{rightData}}" wx:key="item">
+        <view class="cu-item shadow">
+          <view class="image" style="margin: 12rpx 12rpx 12rpx 6rpx">
+            <image src="{{item.thumb}}" data-height="{{item.height}}" data-width="{{item.width}}" mode="widthFix" lazy-load="true" bindtap="previewImage" bindlongpress="handleLongPress" data-url="{{item.url}}" style="height: {{(360 / item.width) * item.height}}rpx;"></image>
+            <text  class="text-gray text-sm">{{item.modify_time}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view wx:else>
+  <view class="margin-tb-xl padding-top-xl padding-bottom-xl">
+    <view class="flex justify-center text-xsl">
+      <image class="empty" src="/assets/images/empty.png"></image>
+    </view>
+    <view class="flex justify-center padding-top-sm">
+      <view class="text-gray text">暂无数据</view>
+    </view>
+  </view>
+</view>
+
+<!-- 底部模态框 -->
+<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog" catchtap>
+    <view class="padding-xl ">
+      <view class="cu-bar btn-group">
+        <button bindtap="delImage" class="cu-btn bg-red"><text class="cuIcon-delete"></text>删除</button>
+        <button bindtap="addToSelected" class="cu-btn bg-green shadow-blur"><text class="cuIcon-add"></text>加入组合</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 右侧抽屉 -->
+<view class="cu-modal drawer-modal justify-end {{modalName=='DrawerModalR'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item" wx:for="{{selectedImages}}" wx:key="index">
+        <view class="cu-avatar xl" style="background-image:url({{item}}); background-size: contain; background-repeat: no-repeat;"></view>
+        <view>
+          <view bindtap="removeFromSelectedList" class="cu-tag round bg-orange light margin-right-xs">
+            <text class="cuIcon-delete"></text>移除
+          </view>
+          <view catchtap="moveSelected" data-index="{{index}}" data-direction="up" class="cu-tag round light">
+            <text class="cuIcon-triangleupfill"></text>
+          </view>
+          <view catchtap="moveSelected" data-index="{{index}}" data-direction="down" class="cu-tag round light">
+            <text class="cuIcon-triangledownfill"></text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <button class="cu-btn block bg-blue margin-tb-sm margin" bindtap="image2video">生成视频</button>
+    <button class="cu-btn block bg-blue margin-tb-sm margin" disabled>创建合集</button>
+    <button class="cu-btn block bg-blue margin-tb-sm margin" disabled>发布图文</button>
+  </view>
+</view>
+
+
+<!-- 悬浮球 -->
+<view class="fixed-ball" wx:if="{{selectedImages.length > 0}}" bindtap="showModal" data-target="DrawerModalR">
+  <view class="cu-avatar-group">
+    <view wx:for="{{selectedImages}}" wx:key="index" class="cu-avatar round lg" style="background-image:url({{item}}); margin-left:-50rpx;"></view>
+  </view>
+</view>
