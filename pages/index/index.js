@@ -6,10 +6,10 @@ Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
-    motto: 'Hi 开发者！',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    defaultAvatar: '/assets/images/avatar/1.jpg',
   },
   //事件处理函数
   bindViewTap: function() {
@@ -18,6 +18,11 @@ Page({
     })
   },
   onLoad: function () {
+    //设置默认头像
+    this.setData({
+      defaultAvatar: '/assets/images/avatar/' + Math.ceil(Math.random() * 5) + '.jpg',
+    })
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

@@ -11,7 +11,7 @@
       妞，今天心情怎么样？推荐给你
       </view>
       <!-- 头像 -->
-      <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="cu-avatar round" style="background-image:url('/assets/images/avatar/{{ran.Next(1,5)}}.jpg')"></button>
+      <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="cu-avatar round" style="background-image:url({{defaultAvatar}})"></button>
       <block wx:else>
         <view class='text-right'>
           <view class="cu-avatar round" style="background-image:url({{userInfo.avatarUrl}})"></view>
