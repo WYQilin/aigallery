@@ -1,0 +1,39 @@
+<view class="container" style="margin-top:{{CustomBar}}rpx;">
+  <!-- 每日一语 -->
+  <view class="slogan">
+    <view class="header flex align-center">
+      <text class="icon margin-right-sm" style="font-size: 66rpx;">☕️</text>
+      <text class="content">4月28日 周二</text>
+    </view>
+   
+    <view class="body flex align-start">
+      <view class="content">
+      妞，今天心情怎么样？推荐给你
+      </view>
+      <!-- 头像 -->
+      <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="cu-avatar round" style="background-image:url('/assets/images/avatar/{{ran.Next(1,5)}}.jpg')"></button>
+      <block wx:else>
+        <view class='text-right'>
+          <view class="cu-avatar round" style="background-image:url({{userInfo.avatarUrl}})"></view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 海报 -->
+  <view class="flex justify-center">
+    
+  </view>
+</view>
+<view class="text-center margin-top flex align-start justify-center">
+  <view class="cu-avatar bg-white solids-right margin-right-sm" style="background-image:url('/assets/images/footer-logo.png'); width: 110rpx; height: 110rpx;"></view>
+  <view class="text-center">
+    <view class="bottom-text" style="display:block">已经到底啦，新的作品等明日再来哟~</view>
+    <view>
+      <text class="bottom-text bottom-text-bg">遇到问题？点击反馈</text>
+      <text class="bottom-text bottom-text-bg">我要投稿</text>
+    </view>
+  </view>
+</view>
+
+<view class="text-center bottom-version">Version: 1.0</view>
