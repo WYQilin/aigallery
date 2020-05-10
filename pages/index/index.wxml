@@ -28,17 +28,17 @@
       <image src="{{item.image}}" lazy-load="true" mode="widthFix" style="width: 100%; border-radius: 30rpx;"></image>
       <view class="text-right margin-tb flex justify-end">
         <button class="flex align-end" open-type="share" data-image="{{item.image}}">
-          <text class="cu-avatar bg-white margin-left-xl" style="background-image: url('/assets/images/icon/share.png'); with: 54rpx; height: 54rpx;"></text>
+          <image class="cu-avatar bg-white margin-left-xl" mode="widthFix" src="/assets/images/icon/share.png" style="with: 54rpx; height: 54rpx;"></image>
           <text class="poster-button-text">分享</text>
         </button>
 
         <view class="flex align-end" bindtap="bindLike" data-poster-id="{{item.id}}" data-index="{{index}}" data-like="{{item.like}}">
-          <text class="cu-avatar bg-white margin-left-xl" style="background-image: url('/assets/images/icon/like{{item.like}}.png'); with: 54rpx; height: 54rpx;"></text>
+          <image class="cu-avatar bg-white margin-left-xl" mode="widthFix" src="/assets/images/icon/like{{item.like}}.png" style="with: 54rpx; height: 54rpx;"></image>
           <text class="poster-button-text">{{item.like_sum}}</text>
         </view>
 
         <view class="flex align-end" bindtap="bindSaveImage" data-image="{{item.image}}">
-          <text class="cu-avatar bg-white margin-left-xl" style="background-image: url('/assets/images/icon/download.png'); with: 54rpx; height: 54rpx;"></text>
+          <image class="cu-avatar bg-white margin-left-xl" mode="widthFix" src="/assets/images/icon/download.png" style="with: 54rpx; height: 54rpx;"></image>
           <text class="poster-button-text">保存</text>
         </view>
       </view>

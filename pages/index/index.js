@@ -63,6 +63,15 @@ Page({
     this.getPosterList();
   },
 
+  //下拉刷新
+  onPullDownRefresh: function() {
+    wx.showLoading({
+      title: '刷新中...',
+    })
+    this.getPosterList()
+    wx.hideLoading();
+  },
+
   //获取顶部日期
   getDate: function() {
     var today = utils.today();
@@ -192,7 +201,7 @@ Page({
   saveImage: function(imageUrl) {
     console.log(imageUrl)
     wx.showLoading({
-      title: '高清图片保存中...',
+      title: '保存中...',
       mask: true,
     });
     wx.downloadFile({
@@ -220,10 +229,16 @@ Page({
           });
         }else{
           console.log(res)
+          wx.showToast({
+            title: '保存失败',
+            icon: 'none',
+            duration: 2000
+          });
         }
       },
       fail: res => {
         console.log(res)
+        wx.hideLoading()
       }
     });
   },
