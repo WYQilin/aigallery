@@ -18,14 +18,10 @@ Page({
       "like2": "看到了吗？是不是变颜色了？",
       "like3": "想知道能变多少次吗？ 实在闲的没事就再试",
       "like4": "感觉身体被掏空， 放过我吧！"
-    }
+    },
+    showBottomModal: false,
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
+
   onLoad: function () {
     //设置默认头像
     this.setData({
@@ -61,6 +57,8 @@ Page({
 
     this.getPosterList();
   },
+
+  //获取用户信息
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -69,6 +67,8 @@ Page({
       hasUserInfo: true
     })
   },
+
+  //获取海报列表
   getPosterList: function() {
     app.apiRequest({
       url: '/posters',
@@ -81,24 +81,28 @@ Page({
     })
   },
 
-  //点赞绑定事件
-  bindLike: function (event) {
-    var index = parseInt(event.currentTarget.dataset.index);
-    var posterId = parseInt(event.currentTarget.dataset.posterId);
-    var like = parseInt(event.currentTarget.dataset.like) + 1;
-    
-    //展示卡片提示
+  //展示点赞卡片提示
+  toastLikeMessage(count) {
     this.setData({
-      showLikeMessage: "like" + (like <= 4? like : 4),
+      showLikeMessage: "like" + (count <= 4 ? count : 4),
     })
     setTimeout(res => {
       this.setData({
         showLikeMessage: null,
       })
     }, 1000);
+  },
 
+  //事件：点赞
+  bindLike: function (event) {
+    var index = parseInt(event.currentTarget.dataset.index);
+    var posterId = parseInt(event.currentTarget.dataset.posterId);
+    var like = parseInt(event.currentTarget.dataset.like) + 1;
+    
     //四次后不再请求接口
     if (like > 4) {
+      //展示卡片提示
+      this.toastLikeMessage(like);
       return;
     }
     
@@ -115,7 +119,95 @@ Page({
         this.setData({
           posters: this.data.posters
         })
+        //展示卡片提示
+        this.toastLikeMessage(like);
       },
     })
+  },
+
+  //事件：保存图片
+  bindSaveImage: function(event){
+    var url = event.currentTarget.dataset.image;
+    //用户需要授权
+    wx.getSetting({
+      success: (res) => {
+        if (!res.authSetting['scope.writePhotosAlbum']) {
+          wx.authorize({
+            scope: 'scope.writePhotosAlbum',
+            success: () => {
+              // 同意授权
+              this.saveImage(url);
+            },
+            fail: (res) => {
+              console.log(res);
+              wx.showToast({
+                title: '请先授权',
+                icon: 'none'
+              })
+              this.setData({
+                showBottomModal: true
+              })
+            }
+          })
+        } else {
+          // 已经授权过
+          this.saveImage(url);
+        }
+      },
+      fail: (res) => {
+        console.log(res);
+      }
+    })
+  },
+  
+  //保存图片
+  saveImage: function(imageUrl) {
+    console.log(imageUrl)
+    wx.showLoading({
+      title: '保存中...',
+      mask: true,
+    });
+    wx.downloadFile({
+      url: imageUrl,
+      success: res => {
+        if (res.statusCode === 200) {
+          console.log(res)
+          let img = res.tempFilePath;
+          wx.saveImageToPhotosAlbum({
+            filePath: img,
+            success: res => {
+              wx.showToast({
+                title: '保存成功',
+                icon: 'success',
+                duration: 2000
+              });
+            },
+            fail: res => {
+              wx.showToast({
+                title: '保存失败',
+                icon: 'none',
+                duration: 2000
+              });
+            }
+          });
+        }else{
+          console.log(res)
+        }
+      },
+      fail: res => {
+        console.log(res)
+      }
+    });
+  },
+  hideBottomModal: function() {
+    this.setData({
+      showBottomModal: false
+    })
+  },
+  onShareAppMessage: function(res) {
+    return {
+      title: 'test',
+      imageUrl: '/assets/images/like1.png'
+    }
   }
 })

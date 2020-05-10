@@ -27,17 +27,17 @@
     <view class="poster margin-tb" wx:for="{{posters}}" wx:key="id">
       <image src="{{item.image}}" lazy-load="true" mode="widthFix" style="width: 100%; border-radius: 30rpx;"></image>
       <view class="text-right margin-tb flex justify-end">
-        <view class="flex align-end">
+        <button class="flex align-end" open-type="share">
           <text class="cu-avatar bg-white margin-left-xl" style="background-image: url('/assets/images/icon/share.png'); with: 54rpx; height: 54rpx;"></text>
           <text class="poster-button-text">分享</text>
-        </view>
+        </button>
 
         <view class="flex align-end" bindtap="bindLike" data-poster-id="{{item.id}}" data-index="{{index}}" data-like="{{item.like}}">
           <text class="cu-avatar bg-white margin-left-xl" style="background-image: url('/assets/images/icon/like{{item.like}}.png'); with: 54rpx; height: 54rpx;"></text>
           <text class="poster-button-text">点赞</text>
         </view>
 
-        <view class="flex align-end">
+        <view class="flex align-end" bindtap="bindSaveImage" data-image="{{item.image}}">
           <text class="cu-avatar bg-white margin-left-xl" style="background-image: url('/assets/images/icon/download.png'); with: 54rpx; height: 54rpx;"></text>
           <text class="poster-button-text">保存</text>
         </view>
@@ -46,12 +46,26 @@
   </view>
 </view>
 
+<!-- 点赞弹框 -->
 <view id="like-message" class="cu-modal {{showLikeMessage?'show':''}}" style="background: rgba(0, 0, 0, 0);">
   <view class="cu-dialog padding-xl" style="width: 472rpx; height: 366rpx; background-color: #fff; opacity: 0.96;">
     <view class="text-center margin-bottom">
       <image wx:if="{{showLikeMessage}}" src="/assets/images/{{showLikeMessage}}.png" style="height: 166.6rpx; width: 140rpx; border-radius: 30rpx;"></image>
     </view>
     <text class="text-center like-message-text">{{likeMessageList[showLikeMessage]}}</text>
+  </view>
+</view>
+
+<!-- 底部模态框 -->
+<view class="cu-modal bottom-modal {{showBottomModal ? 'show': ''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar">
+      <view class='action text-green'>请授权</view>
+      <view class='action text-blue' bindtap='hideBottomModal'>关闭</view>
+    </view>
+    <view class='padding'>
+      <button class="cu-btn bg-blue lg" open-type="openSetting">授权保存图片</button>
+    </view>
   </view>
 </view>
 
