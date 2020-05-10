@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
+const utils = require("../../utils/util.js")
 
 Page({
   data: {
@@ -10,6 +11,8 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     defaultAvatar: '/assets/images/avatar/1.jpg',
+    date: null,
+    slogan: null,
     posters: [],
     maxLikeNum: 3,
     showLikeMessage: null,
@@ -54,8 +57,18 @@ Page({
         }
       })
     }
-
+    
+    this.getDate()
+    this.getSlogan();
     this.getPosterList();
+  },
+
+  //获取顶部日期
+  getDate: function() {
+    var today = utils.today();
+    this.setData({
+      date: today.month + '月' + today.day + '日 ' + today.week 
+    })
   },
 
   //获取用户信息
@@ -76,6 +89,20 @@ Page({
         console.log(res)
         this.setData({
           posters: res.data.data
+        })
+      }
+    })
+  },
+
+  //获取每日一话
+  getSlogan: function() {
+    app.apiRequest({
+      url: '/slogans/last',
+      method: 'GET',
+      success: res => {
+        console.log(res)
+        this.setData({
+          slogan: res.data
         })
       }
     })
@@ -116,6 +143,7 @@ Page({
       },
       success: res => {
         this.data.posters[index].like = like;
+        this.data.posters[index].like_sum = parseInt(this.data.posters[index].like_sum) + 1;
         this.setData({
           posters: this.data.posters
         })
@@ -164,7 +192,7 @@ Page({
   saveImage: function(imageUrl) {
     console.log(imageUrl)
     wx.showLoading({
-      title: '保存中...',
+      title: '高清图片保存中...',
       mask: true,
     });
     wx.downloadFile({
@@ -205,9 +233,17 @@ Page({
     })
   },
   onShareAppMessage: function(res) {
-    return {
-      title: 'test',
-      imageUrl: '/assets/images/like1.png'
+    console.log(res)
+    if (res.from == 'button') {
+      return {
+        title: this.data.slogan.content,
+        imageUrl: res.target.dataset.image
+      }
+    } else {
+      return {
+        title: this.data.slogan.content,
+        imageUrl: '/assets/images/share-banner.jpg'
+      }
     }
   }
 })

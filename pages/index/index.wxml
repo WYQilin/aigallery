@@ -2,13 +2,13 @@
   <!-- 每日一语 -->
   <view class="slogan">
     <view class="header flex align-center">
-      <text class="icon margin-right-sm" style="font-size: 66rpx;">☕️</text>
-      <text class="content">4月28日 周二</text>
+      <text class="icon margin-right-sm" style="font-size: 66rpx;">{{slogan.icon}}</text>
+      <text class="content">{{date}}</text>
     </view>
    
     <view class="body flex align-start">
       <view class="content">
-      妞，今天心情怎么样？推荐给你
+        {{slogan.content || '妞，今天心情怎么样？推荐给你'}}
       </view>
       <!-- 头像 -->
       <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="cu-avatar round">
@@ -27,14 +27,14 @@
     <view class="poster margin-tb" wx:for="{{posters}}" wx:key="id">
       <image src="{{item.image}}" lazy-load="true" mode="widthFix" style="width: 100%; border-radius: 30rpx;"></image>
       <view class="text-right margin-tb flex justify-end">
-        <button class="flex align-end" open-type="share">
+        <button class="flex align-end" open-type="share" data-image="{{item.image}}">
           <text class="cu-avatar bg-white margin-left-xl" style="background-image: url('/assets/images/icon/share.png'); with: 54rpx; height: 54rpx;"></text>
           <text class="poster-button-text">分享</text>
         </button>
 
         <view class="flex align-end" bindtap="bindLike" data-poster-id="{{item.id}}" data-index="{{index}}" data-like="{{item.like}}">
           <text class="cu-avatar bg-white margin-left-xl" style="background-image: url('/assets/images/icon/like{{item.like}}.png'); with: 54rpx; height: 54rpx;"></text>
-          <text class="poster-button-text">点赞</text>
+          <text class="poster-button-text">{{item.like_sum}}</text>
         </view>
 
         <view class="flex align-end" bindtap="bindSaveImage" data-image="{{item.image}}">
@@ -75,8 +75,8 @@
   <view class="text-center">
     <view class="bottom-text" style="display:block">已经到底啦，新的作品等明日再来哟~</view>
     <view>
-      <text class="bottom-text bottom-text-bg">遇到问题？点击反馈</text>
-      <text class="bottom-text bottom-text-bg">我要投稿</text>
+      <button open-type="feedback" class="bottom-text bottom-text-bg">遇到问题？点击反馈</button>
+      <button open-type="contact" class="bottom-text bottom-text-bg">我要投稿</button>
     </view>
   </view>
 </view>
