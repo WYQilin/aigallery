@@ -65,11 +65,12 @@ Page({
 
   //下拉刷新
   onPullDownRefresh: function() {
-    wx.showLoading({
-      title: '刷新中...',
-    })
+    this.getSlogan();
     this.getPosterList()
-    wx.hideLoading();
+    wx.showToast({
+      title: '刷新成功',
+    })
+    wx.stopPullDownRefresh()
   },
 
   //获取顶部日期
@@ -238,7 +239,11 @@ Page({
       },
       fail: res => {
         console.log(res)
-        wx.hideLoading()
+        wx.showToast({
+          title: '下载失败',
+          icon: 'none',
+          duration: 2000
+        });
       }
     });
   },
