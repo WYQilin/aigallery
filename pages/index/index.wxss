@@ -31,6 +31,16 @@
   line-height:20px;
 }
 
+.like-message-text {
+  width:176px;
+  height:63px;
+  font-size:15px;
+  font-family:PingFangSC-Semibold,PingFang SC;
+  font-weight:600;
+  color:rgba(0,0,0,1);
+  line-height:21px;
+}
+
 .bottom-text {
   height:28rpx;
   font-size: 20rpx; 

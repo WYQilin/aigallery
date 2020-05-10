@@ -97,4 +97,86 @@ App({
       }
     });
   },
+
+  /**
+     * 验证登录
+     */
+  checkIsLogin(autoLogin = false) {
+    if (wx.getStorageSync('token') != '') {
+      return true;
+    }
+    if (autoLogin) {
+      this.toLogin();
+    } else {
+      return false;
+    }
+  },
+
+  /**
+   * 跳转登陆页
+   */
+  toLogin() {
+    wx.navigateTo({
+      url: '../login/login',
+    });
+  },
+
+  /**
+   * 获取token
+   */
+  getToken(code, encryptedData, iv, callback = null) {
+    //调后端接口获取token
+    this.apiRequest({
+      url: '/login',
+      method: 'POST',
+      data: {
+        'code': code,
+        'data': encryptedData,
+        'iv': iv
+      },
+      success: res => {
+        wx.setStorageSync('token', res.data.token);
+        callback && callback();
+      }
+    });
+  },
+
+  /**
+   * 授权登录
+   */
+  getUserInfo(e, callback) {
+    let App = this;
+    if (e.detail.errMsg !== 'getUserInfo:ok') {
+      wx.showToast({
+        title: '未授权，登录失败',
+        icon: 'none'
+      })
+      return false;
+    }
+    wx.showLoading({
+      title: "正在登录",
+      mask: true
+    });
+    // 执行微信登录
+    wx.login({
+      success(res) {
+        var code = res.code;
+        wx.getUserInfo({
+          success: res => {
+            // 可以将 res 发送给后台解码出 unionId
+            App.globalData.userInfo = res.userInfo
+            App.globalData.hasUserInfo = true
+            //调后端接口获取token
+            App.getToken(code, res.encryptedData, res.iv, res => {
+              wx.hideLoading();
+              callback();
+            });
+          },
+          fail: res => {
+            console.log(res)
+          }
+        })
+      }
+    });
+  },
 })

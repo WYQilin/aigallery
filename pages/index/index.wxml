@@ -11,10 +11,12 @@
       妞，今天心情怎么样？推荐给你
       </view>
       <!-- 头像 -->
-      <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="cu-avatar round" style="background-image:url({{defaultAvatar}})"></button>
+      <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="cu-avatar round">
+        <image class="cu-avatar round" src="{{defaultAvatar}}"></image>
+      </button>
       <block wx:else>
         <view class='text-right'>
-          <view class="cu-avatar round" style="background-image:url({{userInfo.avatarUrl}})"></view>
+          <image class="cu-avatar round" style="background-image:url({{userInfo.avatarUrl}})"></image>
         </view>
       </block>
     </view>
@@ -24,12 +26,18 @@
   <view id="posters-container" class="text-center">
     <view class="poster margin-tb" wx:for="{{posters}}" wx:key="id">
       <image src="{{item.image}}" lazy-load="true" mode="widthFix" style="width: 100%; border-radius: 30rpx;"></image>
-      <view class="text-right margin-tb">
-        <view class="flex align-end justify-end">
+      <view class="text-right margin-tb flex justify-end">
+        <view class="flex align-end">
           <text class="cu-avatar bg-white margin-left-xl" style="background-image: url('/assets/images/icon/share.png'); with: 54rpx; height: 54rpx;"></text>
           <text class="poster-button-text">分享</text>
-          <text class="cu-avatar bg-white margin-left-xl" style="background-image: url('/assets/images/icon/unliked.png'); with: 54rpx; height: 54rpx;"></text>
+        </view>
+
+        <view class="flex align-end" bindtap="bindLike" data-poster-id="{{item.id}}" data-index="{{index}}" data-like="{{item.like}}">
+          <text class="cu-avatar bg-white margin-left-xl" style="background-image: url('/assets/images/icon/like{{item.like}}.png'); with: 54rpx; height: 54rpx;"></text>
           <text class="poster-button-text">点赞</text>
+        </view>
+
+        <view class="flex align-end">
           <text class="cu-avatar bg-white margin-left-xl" style="background-image: url('/assets/images/icon/download.png'); with: 54rpx; height: 54rpx;"></text>
           <text class="poster-button-text">保存</text>
         </view>
@@ -37,8 +45,19 @@
     </view>
   </view>
 </view>
+
+<view id="like-message" class="cu-modal {{showLikeMessage?'show':''}}" style="background: rgba(0, 0, 0, 0);">
+  <view class="cu-dialog padding-xl" style="width: 472rpx; height: 366rpx; background-color: #fff; opacity: 0.96;">
+    <view class="text-center margin-bottom">
+      <image wx:if="{{showLikeMessage}}" src="/assets/images/{{showLikeMessage}}.png" style="height: 166.6rpx; width: 140rpx; border-radius: 30rpx;"></image>
+    </view>
+    <text class="text-center like-message-text">{{likeMessageList[showLikeMessage]}}</text>
+  </view>
+</view>
+
+<!-- 底部 -->
 <view class="text-center margin-top flex align-start justify-center">
-  <view class="cu-avatar bg-white solids-right margin-right-sm" style="background-image:url('/assets/images/footer-logo.png'); width: 110rpx; height: 110rpx;"></view>
+  <image class="cu-avatar bg-white solids-right margin-right-sm" src="/assets/images/footer-logo.png" style="width: 110rpx; height: 110rpx;"></image>
   <view class="text-center">
     <view class="bottom-text" style="display:block">已经到底啦，新的作品等明日再来哟~</view>
     <view>

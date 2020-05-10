@@ -10,7 +10,15 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     defaultAvatar: '/assets/images/avatar/1.jpg',
-    posters: []
+    posters: [],
+    maxLikeNum: 3,
+    showLikeMessage: null,
+    likeMessageList: {
+      "like1": "真的喜欢我吗？再点击一次会有惊喜",
+      "like2": "看到了吗？是不是变颜色了？",
+      "like3": "想知道能变多少次吗？ 实在闲的没事就再试",
+      "like4": "感觉身体被掏空， 放过我吧！"
+    }
   },
   //事件处理函数
   bindViewTap: function() {
@@ -70,6 +78,44 @@ Page({
           posters: res.data.data
         })
       }
+    })
+  },
+
+  //点赞绑定事件
+  bindLike: function (event) {
+    var index = parseInt(event.currentTarget.dataset.index);
+    var posterId = parseInt(event.currentTarget.dataset.posterId);
+    var like = parseInt(event.currentTarget.dataset.like) + 1;
+    
+    //展示卡片提示
+    this.setData({
+      showLikeMessage: "like" + (like <= 4? like : 4),
+    })
+    setTimeout(res => {
+      this.setData({
+        showLikeMessage: null,
+      })
+    }, 1000);
+
+    //四次后不再请求接口
+    if (like > 4) {
+      return;
+    }
+    
+    app.apiRequest({
+      url: '/like/toggle',
+      method: 'POST',
+      data: {
+        'id': posterId,
+        'type': 'poster',
+        'count': like
+      },
+      success: res => {
+        this.data.posters[index].like = like;
+        this.setData({
+          posters: this.data.posters
+        })
+      },
     })
   }
 })
