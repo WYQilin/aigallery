@@ -6,7 +6,7 @@
       <text class="content">{{date}}</text>
     </view>
    
-    <view class="body flex align-start">
+    <view class="body flex align-start justify-between">
       <view class="content">
         {{slogan.content || '妞，今天心情怎么样？推荐给你'}}
       </view>
@@ -25,20 +25,20 @@
   <!-- 海报 -->
   <view id="posters-container" class="text-center">
     <view class="poster margin-tb" wx:for="{{posters}}" wx:key="id">
-      <image src="{{item.image}}" lazy-load="true" mode="widthFix" style="width: 100%; border-radius: 30rpx;"></image>
-      <view class="text-right margin-tb flex justify-end">
+      <image src="{{item.image}}" lazy-load="true" mode="widthFix" style="width: 100%; border-radius: 30rpx;box-shadow:0rpx 5rpx 29rpx 1rpx #373A40;"></image>
+      <view class="text-right flex justify-end" style="margin: 20rpx 0 40rpx 0;">
         <button class="flex align-end" open-type="share" data-image="{{item.image}}">
-          <image class="cu-avatar bg-white margin-left-xl" mode="widthFix" src="/assets/images/icon/share.png" style="with: 54rpx; height: 54rpx;"></image>
+          <image class="cu-avatar poster-image margin-left-xl" mode="widthFix" src="/assets/images/icon/share.png" style="with: 54rpx; height: 54rpx;"></image>
           <text class="poster-button-text">分享</text>
         </button>
 
         <view class="flex align-end" bindtap="bindLike" data-poster-id="{{item.id}}" data-index="{{index}}" data-like="{{item.like}}">
-          <image class="cu-avatar bg-white margin-left-xl" mode="widthFix" src="/assets/images/icon/like{{item.like}}.png" style="with: 54rpx; height: 54rpx;"></image>
-          <text class="poster-button-text">{{item.like_sum}}</text>
+          <image class="cu-avatar poster-image margin-left-xl" mode="widthFix" src="/assets/images/icon/like{{item.like}}.png" style="with: 54rpx; height: 54rpx;"></image>
+          <text class="poster-button-text">{{item.like_sum > 0 ? item.like_sum : '击掌'}}</text>
         </view>
 
         <view class="flex align-end" bindtap="bindSaveImage" data-image="{{item.image}}">
-          <image class="cu-avatar bg-white margin-left-xl" mode="widthFix" src="/assets/images/icon/download.png" style="with: 54rpx; height: 54rpx;"></image>
+          <image class="cu-avatar poster-image margin-left-xl" mode="widthFix" src="/assets/images/icon/download.png" style="with: 54rpx; height: 54rpx;"></image>
           <text class="poster-button-text">保存</text>
         </view>
       </view>
@@ -50,7 +50,7 @@
 <view id="like-message" class="cu-modal {{showLikeMessage?'show':''}}" style="background: rgba(0, 0, 0, 0);">
   <view class="cu-dialog padding-xl" style="width: 472rpx; height: 366rpx; background-color: #fff; opacity: 0.96;">
     <view class="text-center margin-bottom">
-      <image wx:if="{{showLikeMessage}}" src="/assets/images/{{showLikeMessage}}.png" style="height: 166.6rpx; width: 140rpx; border-radius: 30rpx;"></image>
+      <image wx:if="{{showLikeMessage}}" mode="heightFix" src="/assets/images/{{showLikeMessage}}.png" style="height: 166.6rpx; width: 140rpx; border-radius: 30rpx;"></image>
     </view>
     <text class="text-center like-message-text">{{likeMessageList[showLikeMessage]}}</text>
   </view>

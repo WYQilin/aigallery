@@ -6,7 +6,7 @@
   "window": {
     "navigationBarTitleText": "SnapMark",
     "navigationStyle": "custom",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "black"
   },
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom"

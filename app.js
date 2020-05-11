@@ -45,7 +45,7 @@ App({
         let capsule = wx.getMenuButtonBoundingClientRect();
         if (capsule) {
          	this.globalData.Custom = capsule;
-        	this.globalData.CustomBar = capsule.bottom + capsule.top - e.statusBarHeight;
+        	this.globalData.CustomBar = capsule.bottom + capsule.top; // - e.statusBarHeight;
         } else {
         	this.globalData.CustomBar = e.statusBarHeight + 50;
         }
@@ -55,8 +55,8 @@ App({
   globalData: {
     userInfo: null,
     hasUserInfo: false,
-    apiDomain: 'http://api.buling.club/api', //测试
-    // apiDomain: 'https://snap-mark.buling.club/api', //生产
+    // apiDomain: 'http://api.buling.club/api', //测试
+    apiDomain: 'https://snap-mark.buling.club/api', //生产
   },
   
   //全局统一调用接口的方法
@@ -174,6 +174,8 @@ App({
             // 可以将 res 发送给后台解码出 unionId
             App.globalData.userInfo = res.userInfo
             App.globalData.hasUserInfo = true
+            console.log(123)
+            console.log(App.globalData)
             //调后端接口获取token
             App.getToken(code, res.encryptedData, res.iv, res => {
               wx.hideLoading();
