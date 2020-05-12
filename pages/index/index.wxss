@@ -1,12 +1,24 @@
 .container {
-  padding: 35rpx;
+  padding: 0 35rpx;
+}
+
+.slogan .header {
+  height: 78rpx;
+}
+
+.slogan .header .icon {
+  font-size:56rpx;
+  font-family:AppleColorEmoji;
+  color:rgba(0,0,0,1);
+  line-height:37rpx;
+  letter-spacing:2rpx;
 }
 
 .slogan .header .content {
   font-size:36rpx;
   font-family:ToppanBunkyuMidashiGothicStdN-ExtraBold,ToppanBunkyuMidashiGothicStdN;
   font-weight:800;
-  color:#303133;
+  color: #606060;
   line-height:53rpx;
 }
 
@@ -14,9 +26,10 @@
   width: 580rpx; 
   font-size:48rpx; 
   font-weight:600;
-  font-family:PingFangSC-Semibold,PingFang SC; 
-  line-height:33px; 
-  letter-spacing:1px;
+  font-family: Microsoft Yahei; 
+  line-height:66rpx; 
+  letter-spacing:2rpx;
+  color: #303133;
 }
 
 #posters-container {
@@ -30,6 +43,8 @@
 }
 
 #posters-container .poster-image {
+  width: 54rpx; 
+  height: 54rpx;
   background: rgb(0, 0, 0, 0);
 }
 
@@ -38,12 +53,18 @@
 }
 
 #posters-container .poster-button-text {
-  font-size:14px;
+  font-size:22rpx;
   font-family:PingFangSC-Semibold,PingFang SC;
   font-weight:600;
   color:#98999A;
   line-height:20px;
-  margin-left: 8rpx;
+  margin-left: 4rpx;
+}
+
+.poster image {
+  width: 100%; 
+  border-radius: 30rpx;
+  box-shadow:0px 5px 15px 1px #D9DCE2;
 }
 
 .like-message-text {
@@ -57,13 +78,12 @@
 }
 
 .bottom-text {
-  height: 28rpx;
   font-size: 20rpx; 
   font-family:PingFangSC-Semibold,PingFang SC; 
   font-weight:600; 
   color:rgba(96,96,96,1); 
   line-height:28rpx; 
-  margin: 14rpx 4rpx;
+  margin: 12rpx 4rpx;
   display: inline;
 }
 
@@ -83,5 +103,5 @@
   font-weight:600;
   color:rgba(96,96,96,1);
   line-height:14px;
-  margin-bottom: 10rpx;
+  margin-bottom: 76rpx;
 }

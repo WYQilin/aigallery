@@ -2,7 +2,7 @@
   <!-- 每日一语 -->
   <view class="slogan">
     <view class="header flex align-center">
-      <text class="icon margin-right-sm" style="font-size: 66rpx;">{{slogan.icon}}</text>
+      <text class="icon margin-right-sm">{{slogan.icon}}</text>
       <text class="content">{{date}}</text>
     </view>
    
@@ -25,20 +25,20 @@
   <!-- 海报 -->
   <view id="posters-container" class="text-center">
     <view class="poster margin-tb" wx:for="{{posters}}" wx:key="id">
-      <image src="{{item.image}}" lazy-load="true" mode="widthFix" style="width: 100%; border-radius: 30rpx;box-shadow:0rpx 5rpx 29rpx 1rpx #373A40;"></image>
+      <image src="{{item.image}}" lazy-load="true" mode="widthFix"></image>
       <view class="text-right flex justify-end" style="margin: 20rpx 0 40rpx 0;">
         <button class="flex align-end" open-type="share" data-image="{{item.image}}">
-          <image class="cu-avatar poster-image margin-left-xl" mode="widthFix" src="/assets/images/icon/share.png" style="with: 54rpx; height: 54rpx;"></image>
+          <image class="cu-avatar poster-image margin-left-xl" mode="widthFix" src="/assets/images/icon/share.png"></image>
           <text class="poster-button-text">分享</text>
         </button>
 
         <view class="flex align-end" bindtap="bindLike" data-poster-id="{{item.id}}" data-index="{{index}}" data-like="{{item.like}}">
-          <image class="cu-avatar poster-image margin-left-xl" mode="widthFix" src="/assets/images/icon/like{{item.like}}.png" style="with: 54rpx; height: 54rpx;"></image>
+          <image class="cu-avatar poster-image margin-left-xl" mode="widthFix" src="/assets/images/icon/like{{item.like}}.png"></image>
           <text class="poster-button-text">{{item.like_sum > 0 ? item.like_sum : '击掌'}}</text>
         </view>
 
         <view class="flex align-end" bindtap="bindSaveImage" data-image="{{item.image}}">
-          <image class="cu-avatar poster-image margin-left-xl" mode="widthFix" src="/assets/images/icon/download.png" style="with: 54rpx; height: 54rpx;"></image>
+          <image class="cu-avatar poster-image margin-left-xl" mode="widthFix" src="/assets/images/icon/download.png"></image>
           <text class="poster-button-text">保存</text>
         </view>
       </view>
