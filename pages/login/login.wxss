@@ -4,24 +4,55 @@ page {
 }
 
 .container {
-  padding: 0 60rpx;
+  padding: 66rpx 60rpx;
+}
+
+.container .title {
+  height:66rpx;
+  font-size:48rpx;
+  font-family:PingFangSC-Semibold,PingFang SC;
+  font-weight:600;
+  color:rgba(0,0,0,1);
+  line-height:66rpx;
+  letter-spacing:2rpx;
 }
 
 .wechatapp {
-  padding: 80rpx 0 48rpx;
+  padding: 116rpx 0 48rpx;
   border-bottom: 1rpx solid #e3e3e3;
   margin-bottom: 72rpx;
   text-align: center;
+  background: rgba(0,0,0,0)
 }
 
 .wechatapp .header {
-  width: 190rpx;
-  height: 190rpx;
-  border: 2px solid #fff;
+  width: 240rpx;
+  height: 240rpx;
   margin: 0rpx auto 0;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 1px 0px 5px rgba(50, 50, 50, 0.3);
+}
+
+.wechatapp .name {
+  margin: 24rpx 0 48rpx 0;
+  height:56rpx;
+  font-size:40rpx;
+  font-family:PingFangSC-Semibold,PingFang SC;
+  font-weight:600;
+  color:rgba(116,116,116,1);
+  line-height:56rpx;
+  letter-spacing:2rpx;
+}
+
+.wechatapp .description {
+  width:502rpx;
+  height:96rpx;
+  font-size:34rpx;
+  font-family:PingFangSC-Semibold,PingFang SC;
+  font-weight:600;
+  color:rgba(116,116,116,1);
+  line-height:48rpx;
+  margin: 0 auto;
 }
 
 .auth-title {
@@ -37,30 +68,35 @@ page {
 }
 
 .login-btn {
-  padding: 0 20rpx;
-}
-
-.login-btn button {
-  height: 88rpx;
-  line-height: 88rpx;
-  background: #04be01;
-  color: #fff;
-  font-size: 30rpx;
-  border-radius: 999rpx;
-  text-align: center;
+  width:572rpx;
+  height:80rpx;
+  background:rgba(80,137,143,1);
+  box-shadow:0px 3px 13px -1px rgba(80,137,143,1);
+  border-radius:28rpx;
+  font-size:36rpx;
+  font-family:PingFangSC-Semibold,PingFang SC;
+  font-weight:600;
+  color:rgba(255,255,255,1);
+  line-height:80rpx;
 }
 
 .no-login-btn {
-  margin-top: 20rpx;
-  padding: 0 20rpx;
+  width:64rpx;
+  height:42rpx;
+  font-size:30rpx;
+  font-family:PingFangSC-Semibold,PingFang SC;
+  font-weight:600;
+  color:rgba(95,95,95,1);
+  line-height:42rpx;
+  margin: 76rpx auto;
 }
 
-.no-login-btn button {
-  height: 88rpx;
-  line-height: 88rpx;
-  background: #dfdfdf;
-  color: #fff;
-  font-size: 30rpx;
-  border-radius: 999rpx;
-  text-align: center;
+.footer {
+  height:36rpx;
+  font-size:26rpx;
+  font-family:PingFangSC-Semibold,PingFang SC;
+  font-weight:600;
+  color:rgba(116,116,116,1);
+  line-height:36rpx;
+  margin-top: 398rpx;
 }
