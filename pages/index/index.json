@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "poster": "../../components/canvas-poster/poster"
+  },
   "backgroundColor": "#fff",
   "enablePullDownRefresh": true
 }

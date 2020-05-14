@@ -60,6 +60,8 @@
   color:#98999A;
   line-height:20px;
   margin-left: 4rpx;
+  min-width: 44rpx;
+  text-align: center;
 }
 
 .poster>image {

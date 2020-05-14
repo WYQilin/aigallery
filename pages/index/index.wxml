@@ -25,7 +25,7 @@
   <!-- 海报 -->
   <view id="posters-container" class="text-center">
     <view class="poster margin-tb" wx:for="{{posters}}" wx:key="id">
-      <image src="{{item.image}}" lazy-load="true" mode="widthFix" style="background-color:{{posterBgColorsList[item.id % (posterBgColorsList.length-1)]}}"></image>
+      <image src="{{item.image}}" lazy-load="true" mode="widthFix" style="background-color:{{posterBgColorsList[item.id % (posterBgColorsList.length-1)]}}" bindlongpress="onCreatePosterConfirm" data-image="{{item.image}}"></image>
       <view class="text-right flex justify-end" style="margin: 20rpx 0 40rpx 0;">
         <button class="flex align-end" open-type="share" data-image="{{item.image}}">
           <image class="cu-avatar poster-image margin-left-xl" mode="widthFix" src="/assets/images/icon/share.png"></image>
@@ -68,6 +68,9 @@
     </view>
   </view>
 </view>
+
+<!-- 海报canvas -->
+<poster id="poster" hide-loading="{{false}}" preload="{{false}}" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail"></poster>
 
 <!-- 底部 -->
 <view class="text-center margin-top flex align-start justify-center">

@@ -1,4 +1,6 @@
 //index.js
+import Poster from '../../components/canvas-poster/poster/poster';
+
 //获取应用实例
 const app = getApp()
 const utils = require("../../utils/util.js")
@@ -211,7 +213,7 @@ Page({
       this.setData({
         showLikeMessage: null,
       })
-    }, 1000);
+    }, 1200);
   },
 
   //事件：点赞
@@ -285,6 +287,9 @@ Page({
   //保存图片
   saveImage: function(imageUrl) {
     console.log(imageUrl)
+    if (!this.data.hasUserInfo) {
+      return app.toLogin();
+    }
     wx.showLoading({
       title: '保存中...',
       mask: true,
@@ -349,5 +354,126 @@ Page({
         imageUrl: '/assets/images/share-banner.jpg'
       }
     }
-  }
+  },
+
+  /**
+  * 确认是否生成海报
+  */
+  onCreatePosterConfirm(event) {
+    wx.showModal({
+      title: '生成分享海报？',
+      success: res => {
+        if (res.confirm) {
+          if (!this.data.hasUserInfo) {
+            return app.toLogin();
+          }
+          //用户需要授权
+          wx.getSetting({
+            success: (res) => {
+              if (!res.authSetting['scope.writePhotosAlbum']) {
+                wx.authorize({
+                  scope: 'scope.writePhotosAlbum',
+                  success: () => {
+                    // 同意授权
+                    this.createPoster(event.currentTarget.dataset.image);
+                  },
+                  fail: (res) => {
+                    console.log(res);
+                    wx.showToast({
+                      title: '请先授权',
+                      icon: 'none'
+                    })
+                    this.setData({
+                      showBottomModal: true
+                    })
+                  }
+                })
+              } else {
+                // 已经授权过
+                this.createPoster(event.currentTarget.dataset.image);
+              }
+            },
+            fail: (res) => {
+              console.log(res);
+            }
+          })
+        }
+      }
+    })
+  },
+
+  /**
+   * 生成海报
+   */
+  createPoster(url) {
+    wx.showLoading({
+      title: '下载中',
+    })
+    wx.getImageInfo({
+      src: url,
+      success: res => {
+        var width = res.width;
+        var height = res.height;
+        var codeWith = 160;
+        var codeHeight = 220 
+
+        this.setData({
+          posterConfig: {
+            width: width,
+            height: height,
+            x: 35,
+            y: 210,
+            debug: false,
+            pixelRatio: 1,
+            borderRadius: 20,
+            images: [
+              {
+                width: width,
+                height: height,
+                x: 0,
+                y: 0,
+                borderRadius: 20,
+                url: url,
+              },
+              {
+                width: codeWith,
+                height: codeHeight,
+                x: width - codeWith,
+                y: height - codeHeight,
+                url: '/assets/images/qrcode-fill.png',
+              },
+            ]
+          }
+        }, () => {
+          Poster.create(true);    // 入参：true为抹掉重新生成
+        });
+      },
+      fail: res => {
+        wx.hideLoading();
+      }
+    })
+  },
+  onPosterSuccess(e) {
+    var image = e.detail;
+    wx.saveImageToPhotosAlbum({
+      filePath: image,
+      success: res => {
+        wx.showToast({
+          title: '保存成功',
+          icon: 'success',
+          duration: 2000
+        });
+      },
+      fail: res => {
+        wx.showToast({
+          title: '保存失败',
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  },
+  onPosterFail(err) {
+    console.error(err);
+  },
 })
