@@ -14,6 +14,8 @@ Page({
     date: null,
     slogan: null,
     posters: [],
+    posterPage: 1,
+    posterHasMoreData: true,
     maxLikeNum: 3,
     showLikeMessage: null,
     likeMessageList: {
@@ -55,19 +57,24 @@ Page({
       "#95c623",
     ]
   },
-
+  
   onLoad: function () {
     //设置默认头像
     this.setData({
       defaultAvatar: '/assets/images/avatar/' + Math.ceil(Math.random() * 5) + '.jpg',
     })
-    
-    this.getDate()
-    this.getSlogan();
-    this.getPosterList();
-  },
 
-  onShow: function() {
+    //设置顶部日期
+    this.getDate();
+
+    // 调用监听器，监听数据变化
+    app.watch(this, {
+      userInfo: function (newUserInfo) {
+        this.getSlogan(newUserInfo.gender);
+      }
+    })
+
+    //获取用户信息
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -94,17 +101,45 @@ Page({
         }
       })
     }
+    
+    this.getSlogan();
+    this.getPosterList();
+  },
+
+  onShow: function() {
+    //更新用户信息（登录后返回需要触发用户头像更新）
+    if (!this.data.hasUserInfo && app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    }
   },
 
   //下拉刷新
   onPullDownRefresh: function() {
-    this.getSlogan();
+    this.setData({
+      posterPage: 1,
+    })
+    this.getSlogan(this.data.userInfo.gender);
     this.getPosterList()
     wx.vibrateShort()
     wx.showToast({
       title: '刷新成功',
     })
     wx.stopPullDownRefresh()
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    if (this.data.posterHasMoreData) {
+      this.setData({
+        posterPage: this.data.posterPage + 1
+      })
+      this.getPosterList();
+    }
   },
 
   //获取顶部日期
@@ -118,31 +153,45 @@ Page({
   //获取用户信息
   getUserInfo: function(e) {
     console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+    app.getUserInfo(e, (res)=>{
+      console.log(res)
+      this.setData({
+        userInfo: res.userInfo,
+        hasUserInfo: true
+      })
     })
   },
 
   //获取海报列表
   getPosterList: function() {
+    wx.showLoading({
+      title: '加载中...',
+    })
     app.apiRequest({
       url: '/posters',
+      data: {
+        page: this.data.posterPage
+      },
       success: (res) => {
-        console.log(res)
         this.setData({
-          posters: res.data.data
+          posters: this.data.posters.concat(res.data.data),
+          posterPage: res.data.current_page,
+          posterHasMoreData: Boolean(res.data.next_page_url)
         })
+      },
+      complete: (res) => {
+        wx.hideLoading();
       }
     })
   },
 
   //获取每日一话
-  getSlogan: function() {
+  getSlogan: function(gender = 0) {
     app.apiRequest({
       url: '/slogans/last',
-      method: 'GET',
+      data: {
+        gender: gender
+      },
       success: res => {
         console.log(res)
         this.setData({

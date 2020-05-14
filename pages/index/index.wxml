@@ -8,7 +8,7 @@
    
     <view class="body flex align-start justify-between">
       <view class="content">
-        {{slogan.content || '妞，今天心情怎么样？推荐给你'}}
+        {{slogan.content}}
       </view>
       <!-- 头像 -->
       <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="cu-avatar round">

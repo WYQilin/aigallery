@@ -175,13 +175,11 @@ App({
             // 可以将 res 发送给后台解码出 unionId
             App.globalData.userInfo = res.userInfo
             App.globalData.hasUserInfo = true
-            console.log(123)
-            console.log(App.globalData)
             //调后端接口获取token
             App.getToken(code, res.encryptedData, res.iv, res => {
               wx.hideLoading();
-              callback();
             });
+            callback && callback(res);
           },
           fail: res => {
             console.log(res)
@@ -190,4 +188,28 @@ App({
       }
     });
   },
+
+  // 设置监听器
+  watch: function (ctx, obj) {
+    Object.keys(obj).forEach(key => {
+      this.observer(ctx.data, key, ctx.data[key], function (value) {
+        obj[key].call(ctx, value)
+      })
+    })
+  },
+  // 监听属性，并执行监听函数
+  observer: function (data, key, val, fn) {
+    Object.defineProperty(data, key, {
+      configurable: true,
+      enumerable: true,
+      get: function () {
+        return val
+      },
+      set: function (newVal) {
+        if (newVal === val) return
+        fn && fn(newVal)
+        val = newVal
+      },
+    })
+  }
 })

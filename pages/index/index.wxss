@@ -12,6 +12,7 @@
   color:rgba(0,0,0,1);
   line-height:37rpx;
   letter-spacing:2rpx;
+  width: 56rpx;
 }
 
 .slogan .header .content {
