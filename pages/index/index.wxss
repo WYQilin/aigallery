@@ -10,7 +10,7 @@
   font-size:56rpx;
   font-family:AppleColorEmoji;
   color:rgba(0,0,0,1);
-  line-height:37rpx;
+  line-height:78rpx;
   letter-spacing:2rpx;
   width: 56rpx;
 }
@@ -20,7 +20,7 @@
   font-family:ToppanBunkyuMidashiGothicStdN-ExtraBold,ToppanBunkyuMidashiGothicStdN;
   font-weight:800;
   color: #606060;
-  line-height:53rpx;
+  line-height:78rpx;
 }
 
 .slogan .body .content {
