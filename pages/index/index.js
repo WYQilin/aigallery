@@ -241,7 +241,7 @@ Page({
         this.data.posters[index].like = like;
         this.data.posters[index].like_sum = parseInt(this.data.posters[index].like_sum) + 1;
         this.setData({
-          posters: this.data.posters
+          ["posters[" + index + "]"]: this.data.posters[index], //局部刷新
         })
         //展示卡片提示
         this.toastLikeMessage(like);
