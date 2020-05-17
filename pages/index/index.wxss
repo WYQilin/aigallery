@@ -97,7 +97,7 @@
 .bottom-text-bg {
   background:rgba(237,237,237,1);
   border-radius:3px;
-  padding: 4rpx 10rpx;
+  padding: 4rpx 18rpx;
 }
 
 .bottom-text-bg::after {

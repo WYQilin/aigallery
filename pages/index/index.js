@@ -14,9 +14,13 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     defaultAvatar: '/assets/images/avatar/1.jpg',
     date: null,
-    slogan: null,
+    slogan: {
+      icon: '☕️',
+      content: '生活不管怎样，都值得被标记'
+    },
     posters: [],
     posterPage: 1,
+    posterLoading: false,
     posterHasMoreData: true,
     maxLikeNum: 3,
     showLikeMessage: null,
@@ -166,6 +170,9 @@ Page({
 
   //获取海报列表
   getPosterList: function() {
+    this.setData({
+      posterLoading: true
+    })
     wx.showLoading({
       title: '加载中...',
     })
@@ -182,6 +189,9 @@ Page({
         })
       },
       complete: (res) => {
+        this.setData({
+          posterLoading: false
+        })
         wx.hideLoading();
       }
     })
