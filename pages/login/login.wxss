@@ -4,12 +4,12 @@ page {
 }
 
 .container {
-  padding: 66rpx 60rpx;
+  padding: 10rpx 60rpx;
 }
 
 .container .title {
   height:66rpx;
-  font-size:48rpx;
+  font-size:30rpx;
   font-family:PingFangSC-Semibold,PingFang SC;
   font-weight:600;
   color:rgba(0,0,0,1);

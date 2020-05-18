@@ -124,10 +124,12 @@ Page({
 
   //下拉刷新
   onPullDownRefresh: function() {
-    this.setData({
-      posterPage: 1,
-    })
     this.getSlogan(this.data.userInfo.gender);
+    this.setData({
+      posters: [],
+      posterPage: 1,
+      posterLoading: false,
+    })
     this.getPosterList()
     wx.vibrateShort()
     wx.showToast({

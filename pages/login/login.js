@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    StatusBar: App.globalData.StatusBar,
+    CustomBar: App.globalData.CustomBar,
   },
 
   /**

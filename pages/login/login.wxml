@@ -1,5 +1,5 @@
 <view class="container">
-  <view class="title text-center">微信授权</view>
+  <view class="title text-center" style="margin-top:{{CustomBar}}rpx;">微信授权</view>
   <view class="wechatapp">
     <image class="header" src="/assets/images/logo.png"></image>
     <!-- <view class="header">
