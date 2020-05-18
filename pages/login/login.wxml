@@ -14,5 +14,5 @@
   <button class="login-btn " openType="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">授权登录</button>
   <view class="no-login-btn" catchtap="onNotLogin">取消</view>
 
-  <view class="footer text-center">不管生活怎样，都值得被标记</view>
+  <view class="footer text-center">生活不管怎样，都值得被标记</view>
 </view>
