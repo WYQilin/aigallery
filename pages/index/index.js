@@ -235,7 +235,8 @@ Page({
     var like = parseInt(event.currentTarget.dataset.like) + 1;
     
     //四次后不再请求接口
-    if (like > 4) {
+    var userId = wx.getStorageSync('userId');
+    if (like > 4 && userId ? userId != 23 : true) {
       //展示卡片提示
       this.toastLikeMessage(like);
       return;

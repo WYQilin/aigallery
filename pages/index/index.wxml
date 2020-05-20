@@ -33,7 +33,7 @@
         </button>
 
         <view class="flex align-end" bindtap="bindLike" data-poster-id="{{item.id}}" data-index="{{index}}" data-like="{{item.like}}">
-          <image class="cu-avatar poster-image margin-left-xl" mode="widthFix" src="/assets/images/icon/like{{item.like}}.png"></image>
+          <image class="cu-avatar poster-image margin-left-xl" mode="widthFix" src="/assets/images/icon/like{{item.like <=4 ? item.like : 4}}.png"></image>
           <text class="poster-button-text">{{item.like_sum > 0 ? item.like_sum : '击掌'}}</text>
         </view>
 

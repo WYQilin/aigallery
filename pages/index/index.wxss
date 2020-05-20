@@ -24,7 +24,7 @@
 }
 
 .slogan .body .content {
-  width: 580rpx; 
+  width: 606rpx; 
   font-size:48rpx; 
   font-weight:600;
   font-family: Microsoft Yahei; 

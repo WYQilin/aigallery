@@ -145,6 +145,7 @@ App({
       },
       success: res => {
         wx.setStorageSync('token', res.data.token);
+        wx.setStorageSync('userId', res.data.id);
         callback && callback();
       }
     });
