@@ -21,7 +21,7 @@
       </block>
     </view>
   </view>
-
+  <ad unit-id="adunit-d4325f7c7cba2503"></ad>
   <!-- 海报 -->
   <view id="posters-container" class="text-center">
     <view class="poster margin-tb" wx:for="{{posters}}" wx:key="id">
@@ -84,4 +84,4 @@
   </view>
 </view>
 
-<view class="text-center bottom-version">Version: 1.0</view>
+<view class="text-center bottom-version">Version: 1.1.0</view>

@@ -31,6 +31,7 @@
   line-height:66rpx; 
   letter-spacing:2rpx;
   color: #303133;
+  margin-bottom: 10rpx;
 }
 
 #posters-container {

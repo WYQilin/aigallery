@@ -4,6 +4,8 @@ import Poster from '../../components/canvas-poster/poster/poster';
 //获取应用实例
 const app = getApp()
 const utils = require("../../utils/util.js")
+// 在页面中定义激励视频广告
+let videoAd = null
 
 Page({
   data: {
@@ -61,7 +63,8 @@ Page({
       "#3c6e71",
       "#ffbc42",
       "#95c623",
-    ]
+    ],
+    downloadImageUrl: null,
   },
   
   onLoad: function () {
@@ -110,6 +113,27 @@ Page({
     
     this.getSlogan();
     this.getPosterList();
+
+    // 在页面onLoad回调事件中创建激励视频广告实例
+    if (wx.createRewardedVideoAd) {
+      videoAd = wx.createRewardedVideoAd({
+        adUnitId: 'adunit-3da2136c1685aabc'
+      })
+      videoAd.onLoad(() => {})
+      videoAd.onError((err) => {})
+      videoAd.onClose((status) => {
+        if (status && status.isEnded || status === undefined) {
+          // 正常播放结束，下发奖励
+          this.saveImage(this.data.downloadImageUrl);
+        } else {
+          // 播放中途退出，进行提示
+          wx.showToast({
+            title: '广告观看完才可下载原图！',
+            icon: 'none'
+          })
+        }
+      })
+    }
   },
 
   onShow: function() {
@@ -264,7 +288,9 @@ Page({
 
   //事件：保存图片
   bindSaveImage: function(event){
-    var url = event.currentTarget.dataset.image;
+    this.setData({
+      downloadImageUrl: event.currentTarget.dataset.image
+    })
     //用户需要授权
     wx.getSetting({
       success: (res) => {
@@ -273,7 +299,15 @@ Page({
             scope: 'scope.writePhotosAlbum',
             success: () => {
               // 同意授权
-              this.saveImage(url);
+              // 显示激励视频广告
+              videoAd.show().catch(() => {
+                // 失败重试
+                videoAd.load()
+                  .then(() => videoAd.show())
+                  .catch(err => {
+                    console.log('激励视频 广告显示失败')
+                  })
+              })
             },
             fail: (res) => {
               console.log(res);
@@ -288,7 +322,15 @@ Page({
           })
         } else {
           // 已经授权过
-          this.saveImage(url);
+          // 显示激励视频广告
+          videoAd.show().catch(() => {
+            // 失败重试
+            videoAd.load()
+              .then(() => videoAd.show())
+              .catch(err => {
+                console.log('激励视频 广告显示失败')
+              })
+          })
         }
       },
       fail: (res) => {
@@ -427,8 +469,8 @@ Page({
       success: res => {
         var width = res.width;
         var height = res.height;
-        var codeWith = 160;
-        var codeHeight = 220 
+        var codeWith = 220;
+        var codeHeight = 240 
 
         this.setData({
           posterConfig: {

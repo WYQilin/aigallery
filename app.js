@@ -57,7 +57,7 @@ App({
     userInfo: null,
     hasUserInfo: false,
     // apiDomain: 'http://api.buling.club/api', //测试
-    apiDomain: 'https://snap-mark.buling.club/api', //生产
+    apiDomain: 'https://snap-mark.yaqi.wang/api', //生产
   },
   
   //全局统一调用接口的方法
