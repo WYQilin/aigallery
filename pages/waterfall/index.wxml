@@ -93,7 +93,10 @@
         <view class="cu-item">
           <view class="image" style="margin: 12rpx 6rpx 12rpx 12rpx">
             <image src="{{item.thumb}}" data-height="{{item.height}}" data-width="{{item.width}}" mode="widthFix" lazy-load="true" bindtap="previewImage" bindlongpress="handleLongPress" data-url="{{item.url}}" style="height: {{(360 / item.width) * item.height}}rpx;"></image>
-            <text  class="text-gray text-sm">{{item.modify_time}}</text>
+            <view class="flex justify-between">
+              <text class="text-gray text-sm">{{item.modify_time}}</text>
+              <text class="text-gray text-sm">{{item.width}}x{{item.height}}</text>
+            </view>
           </view>
         </view>
       </view>
@@ -106,22 +109,19 @@
         <view class="cu-item shadow">
           <view class="image" style="margin: 12rpx 12rpx 12rpx 6rpx">
             <image src="{{item.thumb}}" data-height="{{item.height}}" data-width="{{item.width}}" mode="widthFix" lazy-load="true" bindtap="previewImage" bindlongpress="handleLongPress" data-url="{{item.url}}" style="height: {{(360 / item.width) * item.height}}rpx;"></image>
-            <text  class="text-gray text-sm">{{item.modify_time}}</text>
+            <view class="flex justify-between">
+              <text class="text-gray text-sm">{{item.modify_time}}</text>
+              <text class="text-gray text-sm">{{item.width}}x{{item.height}}</text>
+            </view>
           </view>
         </view>
       </view>
     </view>
   </view>
 </view>
-<view wx:else>
-  <view class="margin-tb-xl padding-top-xl padding-bottom-xl">
-    <view class="flex justify-center text-xsl">
-      <image class="empty" src="/assets/images/empty.png"></image>
-    </view>
-    <view class="flex justify-center padding-top-sm">
-      <view class="text-gray text">暂无数据</view>
-    </view>
-  </view>
+<view wx:else class="flex justify-center align-center" style="min-height: {{safeHeight - 200}}px;">
+  <import src="/components/templates/empty.wxml"/>
+  <template is="empty"></template>
 </view>
 
 <!-- 底部模态框 -->
@@ -155,7 +155,10 @@
         </view>
       </view>
     </view>
-    <button class="cu-btn block bg-blue margin-tb-sm margin" bindtap="image2video">生成视频</button>
+    <button class="cu-btn block bg-blue padding-tb-sm margin" bindtap="image2video">
+      生成视频
+      <text class="text-xs text-red" style="position: absolute; bottom: -22rpx;">仅支持同尺寸图片</text>
+    </button>
     <button class="cu-btn block bg-blue margin-tb-sm margin" disabled>创建合集</button>
     <button class="cu-btn block bg-blue margin-tb-sm margin" disabled>发布图文</button>
   </view>
@@ -164,7 +167,12 @@
 
 <!-- 悬浮球 -->
 <view class="fixed-ball" wx:if="{{selectedImages.length > 0}}" bindtap="showModal" data-target="DrawerModalR">
-  <view class="cu-avatar-group">
+  <view class="cu-avatar-group" style="direction: ltr;">
     <view wx:for="{{selectedImages}}" wx:key="index" class="cu-avatar round lg" style="background-image:url({{item}}); margin-left:-50rpx;"></view>
   </view>
 </view>
+
+<!-- 底部 -->
+<bottom wx:if="{{!imageHasMoreData}}"></bottom>
+<import src="/components/templates/copyright.wxml" />
+<template is="copyright"></template>

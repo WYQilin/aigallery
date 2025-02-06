@@ -1,0 +1,7 @@
+<template name="copyright">
+
+<view class="text-center padding-tb-sm" style="font-size:20rpx;font-family:PingFangSC-Semibold,PingFang SC;font-weight:600;color:rgb(122, 122, 122);line-height:14px;margin-bottom: 76rpx;">
+  <view class="colorui-text">Copyright © 2025 奇绘图册 All Rights Reserved.</view>
+</view>
+
+</template>

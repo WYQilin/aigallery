@@ -1,6 +1,7 @@
 {
+  "backgroundColor": "#fff",
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "bottom": "/components/bottom/bottom"
-  },
-  "enablePullDownRefresh": true
+  }
 }

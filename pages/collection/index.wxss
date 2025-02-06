@@ -6,16 +6,3 @@ swiper-item image {
   background-repeat: no-repeat;
   background-position-x: 50%;
 }
-
-.empty {
-  display: inline-flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  width: 256rpx;
-  height: 256rpx;
-  background-size: cover;
-  background-position: center;
-  vertical-align: middle;
-}

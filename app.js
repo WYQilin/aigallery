@@ -45,6 +45,7 @@ App({
     })
     // 获取系统状态栏信息
     const windowInfo = wx.getWindowInfo();
+    this.globalData.safeHeight = windowInfo.safeArea.height;
     this.globalData.StatusBar = windowInfo.statusBarHeight;
     let capsule = wx.getMenuButtonBoundingClientRect();
     if (capsule) {

@@ -228,19 +228,6 @@
   border: 2px solid white;
 }
 
-.empty {
-  display: inline-flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  width: 256rpx;
-  height: 256rpx;
-  background-size: cover;
-  background-position: center;
-  vertical-align: middle;
-}
-
 /* 悬浮球样式 */
 .fixed-ball {
   position: fixed;
@@ -250,6 +237,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 999999999;
 }
 
 button[disabled] {

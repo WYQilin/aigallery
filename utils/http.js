@@ -24,7 +24,7 @@ const http = {
       },
       dataType: 'json',
       data: options.data,
-      timeout: 3000, // 设置超时时间
+      timeout: options.method ? options.method : 10000, // 设置超时时间
       success: res => {
         switch (res.statusCode) {
           case 200:

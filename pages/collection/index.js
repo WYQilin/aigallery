@@ -1,6 +1,7 @@
 // pages/collection/index.js
 //获取应用实例
 const http = require('../../utils/http.js')
+const app = getApp()
 
 Page({
 
@@ -8,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    safeHeight: app.globalData.safeHeight,
     posters: [],
     posterPage: 1,
     posterLoading: false,

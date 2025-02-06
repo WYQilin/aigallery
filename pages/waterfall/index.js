@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    safeHeight: app.globalData.safeHeight,
     imagePage: 1,
     imageLoading: false,
     imageHasMoreData: true,
@@ -270,18 +271,27 @@ Page({
         })
         return;
       }
-
+      wx.showLoading({
+        title: '处理中...'
+      })
       http.request({
         url: '/api/images2video',
         method: 'POST',
+        timeout: 10000,
         data: {
           images: images
         },
         success: res => {
-          console.log(res)
           wx.showToast({
-            title: '已提交',
+            title: res.data.message,
           })
+          this.setData({
+            selectedImages: [],
+            modalName: null
+          })
+        },
+        complete: res => {
+          wx.hideLoading()
         }
       })
     }

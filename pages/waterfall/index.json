@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "bottom": "/components/bottom/bottom"
+  },
   "enablePullDownRefresh": true
 }

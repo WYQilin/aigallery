@@ -1,0 +1,10 @@
+<view class="text-center margin-top flex align-start justify-center">
+  <image class="cu-avatar bg-white solids-right margin-right-sm" src="/assets/images/small-logo.png" style="width: 100rpx; height: 100rpx;"></image>
+  <view class="text-center">
+    <view class="bottom-text" style="display:block">{{title}}</view>
+    <view>
+      <button open-type="feedback" class="bottom-text bottom-text-bg">遇到问题？点击反馈</button>
+      <button open-type="contact" class="bottom-text bottom-text-bg"><text class="cuIcon-service"></text>联系作者</button>
+    </view>
+  </view>
+</view>

@@ -2,13 +2,9 @@
   <view slot="content">合集</view>
 </cu-custom>
 
-<view wx:if="{{posters.length == 0}}" class="margin-tb-xl padding-top-xl padding-bottom-xl" style="margin-top: 206px;">
-  <view class="flex justify-center text-xsl">
-    <image class="empty" src="/assets/images/empty.png"></image>
-  </view>
-  <view class="flex justify-center padding-top-sm">
-    <view class="text-gray text">暂无数据</view>
-  </view>
+<view wx:if="{{posters.length == 0}}" class="flex justify-center align-center" style="min-height: {{safeHeight}}px;">
+  <import src="/components/templates/empty.wxml"/>
+  <template is="empty"></template>
 </view>
 
 <view id="posters-container">
@@ -68,3 +64,8 @@
     </view>
   </view>
 </view>
+
+<!-- 底部 -->
+<bottom wx:if="{{!posterHasMoreData}}"></bottom>
+<import src="/components/templates/copyright.wxml" />
+<template is="copyright"></template>

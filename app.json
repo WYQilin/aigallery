@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/waterfall/index",
-    "pages/collection/index"
+    "pages/collection/index",
+    "pages/videos/index"
   ],
   "window": {
     "navigationBarTitleText": "奇绘图册",
@@ -21,6 +22,12 @@
       {
         "pagePath": "pages/waterfall/index",
         "text": "图池",
+        "iconPath": "assets/images/icon/pictures.png",
+        "selectedIconPath": "assets/images/icon/pictures.png"
+      },
+      {
+        "pagePath": "pages/videos/index",
+        "text": "视频",
         "iconPath": "assets/images/icon/pictures.png",
         "selectedIconPath": "assets/images/icon/pictures.png"
       }

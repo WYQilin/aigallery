@@ -1,0 +1,49 @@
+<cu-custom bgColor="bg-gradual-pink">
+  <view slot="content">视频</view>
+</cu-custom>
+<!-- 视频列表 -->
+<view id="videos-container" style="min-height: {{safeHeight - 200}}px;">
+  <view wx:if="{{videos.length == 0}}" class="flex justify-center align-center" style="min-height: {{safeHeight}}px;">
+    <import src="/components/templates/empty.wxml"/>
+    <template is="empty"></template>
+  </view>
+
+  <view class="video margin-bottom" wx:for="{{videos}}" wx:key="id">
+    <video src="{{item.url}}" lazy-load="true" style="width: 100%;"></video>
+    <view class="flex justify-between align-center">
+      <view class="text-gray text-sm margin-left padding-bottom">{{item.created_at}}</view>
+      <view class="text-right flex justify-end" style="margin: 20rpx 35rpx 40rpx 35rpx;">
+        <button class="flex align-end" open-type="share" data-url="{{item.url}}">
+          <image class="cu-avatar video-image margin-left" mode="widthFix" src="/assets/images/icon/share.png"></image>
+          <text class="video-button-text">分享</text>
+        </button>
+        <view class="flex align-end" bindtap="bindSaveImage" data-url="{{item.url}}">
+          <image class="cu-avatar video-image margin-left" mode="widthFix" src="/assets/images/icon/download.png"></image>
+          <text class="video-button-text">下载</text>
+        </view>
+        <view class="flex align-end" bindtap="bindPublish" data-id="{{item.id}}">
+          <image class="cu-avatar video-image margin-left" mode="widthFix" src="/assets/images/icon/tiktok.png"></image>
+          <text class="video-button-text" style="text-decoration: line-through">发布</text>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>
+<!-- 底部模态框 -->
+<view class="cu-modal bottom-modal {{showBottomModal ? 'show': ''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar">
+      <view class='action text-green'>请授权</view>
+      <view class='action text-blue' bindtap='hideBottomModal'>关闭</view>
+    </view>
+    <view class='padding'>
+      <button class="cu-btn bg-blue lg" open-type="openSetting">授权保存图片</button>
+    </view>
+  </view>
+</view>
+
+<!-- 底部 -->
+<bottom wx:if="{{!videoHasMoreData}}"></bottom>
+<import src="/components/templates/copyright.wxml"/>
+<template is="copyright"></template>
