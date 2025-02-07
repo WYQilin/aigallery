@@ -17,19 +17,19 @@
         "pagePath": "pages/collection/index",
         "text": "合集",
         "iconPath": "assets/images/icon/collection.png",
-        "selectedIconPath": "assets/images/icon/collection.png"
+        "selectedIconPath": "assets/images/icon/collection-selected.png"
       },
       {
         "pagePath": "pages/waterfall/index",
         "text": "图池",
         "iconPath": "assets/images/icon/pictures.png",
-        "selectedIconPath": "assets/images/icon/pictures.png"
+        "selectedIconPath": "assets/images/icon/pictures-selected.png"
       },
       {
         "pagePath": "pages/videos/index",
         "text": "视频",
-        "iconPath": "assets/images/icon/pictures.png",
-        "selectedIconPath": "assets/images/icon/pictures.png"
+        "iconPath": "assets/images/icon/video.png",
+        "selectedIconPath": "assets/images/icon/video-selected.png"
       }
     ]
   },

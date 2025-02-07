@@ -11,7 +11,7 @@
   <view class="video margin-bottom" wx:for="{{videos}}" wx:key="id">
     <video src="{{item.url}}" lazy-load="true" style="width: 100%;"></video>
     <view class="flex justify-between align-center">
-      <view class="text-gray text-sm margin-left padding-bottom">{{item.created_at}}</view>
+      <view class="text-gray text-sm margin-left margin-tb-sm">{{item.created_at}}</view>
       <view class="text-right flex justify-end" style="margin: 20rpx 35rpx 40rpx 35rpx;">
         <button class="flex align-end" open-type="share" data-url="{{item.url}}">
           <image class="cu-avatar video-image margin-left" mode="widthFix" src="/assets/images/icon/share.png"></image>
