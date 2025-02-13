@@ -277,13 +277,14 @@ Page({
       http.request({
         url: '/api/images2video',
         method: 'POST',
-        timeout: 10000,
+        timeout: 8000,
         data: {
           images: images
         },
         success: res => {
           wx.showToast({
             title: res.data.message,
+            icon: 'none'
           })
           this.setData({
             selectedImages: [],
@@ -291,7 +292,9 @@ Page({
           })
         },
         complete: res => {
-          wx.hideLoading()
+          setTimeout(() => {
+            wx.hideLoading()
+          }, 1000);
         }
       })
     }

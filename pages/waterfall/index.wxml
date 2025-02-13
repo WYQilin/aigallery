@@ -157,7 +157,6 @@
     </view>
     <button class="cu-btn block bg-blue padding-tb-sm margin" bindtap="image2video">
       生成视频
-      <text class="text-xs text-red" style="position: absolute; bottom: -22rpx;">仅支持同尺寸图片</text>
     </button>
     <button class="cu-btn block bg-blue margin-tb-sm margin" disabled>创建合集</button>
     <button class="cu-btn block bg-blue margin-tb-sm margin" disabled>发布图文</button>

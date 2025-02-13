@@ -132,7 +132,7 @@ Page({
       success: res => {
         if (res.statusCode === 200) {
           let img = res.tempFilePath;
-          wx.saveImageToPhotosAlbum({
+          wx.saveVideoToPhotosAlbum({
             filePath: img,
             success: res => {
               wx.showToast({
@@ -142,6 +142,7 @@ Page({
               });
             },
             fail: res => {
+              console.log(res)
               wx.showToast({
                 title: '保存失败',
                 icon: 'none',
