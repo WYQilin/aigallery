@@ -9,6 +9,9 @@
   </view>
 
   <view class="video margin-bottom" wx:for="{{videos}}" wx:key="id">
+    <!-- 小程序类目不支持视频的话使用gif动图 -->
+    <!-- <image src="{{item.poster}}" mode="aspectFit"></image> -->
+    <!-- 小程序类目有视频资质使用视频 -->
     <video src="{{item.url}}" lazy-load="true" style="width: 100%;"></video>
     <view class="flex justify-between align-center">
       <view class="text-gray text-sm margin-left margin-tb-sm">{{item.created_at}}</view>
