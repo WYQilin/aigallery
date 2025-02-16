@@ -12,7 +12,7 @@
   <p align="center">
     一个AI绘画爱好者使用的图片管理小程序
     <br />
-    <a href="https://github.com/WYQilin/aigallery">查看Demo</a>
+    <a href="https://github.com/WYQilin/aigallery?#%E9%A2%84%E8%A7%88">查看Demo</a>
     ·
     <a href="https://github.com/WYQilin/aigallery/issues">反馈</a>
     ·
