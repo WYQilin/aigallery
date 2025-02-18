@@ -50,11 +50,12 @@ Page({
       success: (res) => {
         var data = res.data.data
         data.forEach(item => {
+          var showHeight = (360 / item.width) * item.height;
           if (leftHeight <= rightHeight) {
-            leftHeight += item.height;
+            leftHeight += showHeight;
             leftData.push(item)
           } else {
-            rightHeight += item.height;
+            rightHeight += showHeight;
             rightData.push(item);
           }
         });
@@ -62,6 +63,8 @@ Page({
         this.setData({
           leftData,
           rightData,
+          leftHeight,
+          rightHeight,
           imagePage: res.data.current_page,
           imageHasMoreData: Boolean(res.data.next_page_url)
         })
